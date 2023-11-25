@@ -1,0 +1,154 @@
+﻿@model Cocktail.Models.Customers
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="~/css/style1.css">
+</head>
+
+
+<body>
+    <div class="wrapper login">
+        <div class="container">
+            <div class="col-left">
+                <div class="login-text">
+                    <h2>Welcome!</h2>
+                    <p>
+                        Create your account and <br>place your first order now!<br><br>
+                        Already have an account? <a onclick="window.location.href='@Url.Action("Login", "Home")'" style="text-decoration:underline;"><br>Click here to log In</a>
+                </div>
+            </div>
+            <div class="col-right">
+                <div class="login-form">
+                
+                <h2 style="text-align:center">Sign up form</h2>
+                   
+                        @if (ViewBag.Message != null)
+                        {
+                        <div class="msg" style="text-align:center;">@ViewBag.Message</div>
+                        }
+                       
+                @Html.ValidationSummary(false)
+                 @using (Html.BeginForm("Signup", "Home", FormMethod.Post))
+                    {
+                        
+                        <p>
+                            <label for="FirstName">First Name:<span>*</span></label>
+                            @Html.TextBoxFor(model => model.FirstName)
+                            @Html.ValidationMessageFor(model => model.FirstName, "", new { required = "required",@class = "text-danger" })
+
+                        </p>
+                        <p>
+                            <label for="LastName">Last Name:<span>*</span></label>
+                            @Html.TextBoxFor(model => model.LastName)
+                            @Html.ValidationMessageFor(model => model.LastName, "", new { required = "required",@class = "text-danger" })
+
+                        </p>
+                        <p>
+                            <label for="DateOfBirth">Date of Birth<span>*</span></label>
+                            @Html.TextBoxFor(model => model.DateOfBirth, new { type = "date", required = "required", onchange = "validateAge(this)", value = "01-01-2001" })
+                            @Html.ValidationMessageFor(model => model.DateOfBirth, "", new { @class = "text-danger" })
+                        </p>
+
+                      
+                        <p>
+                            <label for="UserID">User ID<span>*</span></label>
+                            @Html.TextBoxFor(model => model.UserId, new { required = "required", @class = "text-danger" })
+                        </p>
+
+                        <p>
+                            <label for="Email">Email address<span>*</span></label>
+                            @Html.TextBoxFor(model => model.Email, new { type = "email", required = "required",oninput = "validateEmail(this)" })
+                            <span id="email-validation" class="text-danger"></span>
+                        </p>
+
+                        <p>
+                            <label for="MobileNo">Mobile Number<span>*</span></label>
+                            @Html.TextBoxFor(model => model.Contact, new { type = "tel",required = "required", pattern = "[0-9]{10}", oninput = "validateMobile(this)" })
+                            <span id="mobile-validation" class="text-danger"></span>
+                        </p>
+                        <p>
+                            <label for="FullAddress">Full Address<span>*</span></label>
+                            @Html.TextBoxFor(model => model.FullAddress, new {required = "required",@class = "text-danger" })
+                        </p>
+
+                        <p>
+                            <label>Password<span>*</span></label>
+                            <input type="password" name="Password" required>
+                            @Html.ValidationMessageFor(model => model.Password)
+                        </p>
+
+                        <p>
+                            <label>Confirm Password<span>*</span></label>
+                            <input id="confirm-password" type="password" name="ConfirmPassword" required>
+                            <span id="password-match-validation" class="text-danger"></span>
+                        </p>
+                        <p> <input type="submit" style="background:rgb(216, 232, 216)" value="Sign Up"> </p>
+                        <p> <a href="@Url.Action("Forgotpassword", "Home")">Forgot password?</a> </p>
+                   }
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function validateEmail(input) {
+            const emailValidation = document.getElementById('email-validation');
+            if (!input.validity.valid) {
+                emailValidation.textContent = 'Invalid email format.';
+            } else {
+                emailValidation.textContent = '';
+            }
+        }
+
+        function validateMobile(input) {
+            const mobileValidation = document.getElementById('mobile-validation');
+            if (!input.validity.valid) {
+                mobileValidation.textContent = 'Invalid mobile number format.';
+            } else {
+                mobileValidation.textContent = '';
+            }
+        }
+        document.querySelector('form').addEventListener('submit', function (e) {
+            var passwordInput = document.querySelector('input[type="password"]');
+            var confirmPasswordInput = document.getElementById('confirm-password');
+
+            if (passwordInput.value !== confirmPasswordInput.value) {
+                e.preventDefault();
+                alert('Password and confirm password do not match.');
+            }
+        });
+        const passwordInput = document.querySelector('input[type="password"]');
+        const confirmPasswordInput = document.getElementById('confirm-password');
+        const passwordMatchValidation = document.getElementById('password-match-validation');
+
+        confirmPasswordInput.addEventListener('input', function () {
+            if (passwordInput.value !== confirmPasswordInput.value) {
+                passwordMatchValidation.textContent = 'Passwords do not match.';
+            } else {
+                passwordMatchValidation.textContent = '';
+            }
+        });
+        function validateAge(input) {
+            const dob = new Date(input.value);
+            const today = new Date();
+            const age = today.getFullYear() - dob.getFullYear();
+
+            if (age < 21) {
+                alert('You must be at least 21 years old to proceed.');
+                input.value = ''; // Clear the date input
+            }
+        }
+    </script>
+</body>
+
+</html>

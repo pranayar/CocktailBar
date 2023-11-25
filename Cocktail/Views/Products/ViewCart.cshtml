@@ -1,0 +1,101 @@
+﻿@model IEnumerable<Cocktail.Models.Products>
+
+<h3 style="cursor:pointer; text-align:right" onclick="window.location.href='@Url.Action("ViewOrderHistory", "Products")'">Order History</h3>
+@if(Model.Count()>0)
+{
+    <table class="table">
+        <thead>
+            <tr>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Description)
+                </th>
+
+                @*  <th>
+                @Html.DisplayNameFor(model => model.ImageLink)
+            </th> *@
+                <th>
+                    @Html.DisplayNameFor(model => model.Category)
+                </th>
+                <th>
+                    Rate
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Quantity)
+                </th>
+                <th>Total Amount</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+
+                    @*  <td>
+                @Html.DisplayFor(modelItem => item.ImageLink)
+            </td> *@
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Category)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Amount)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Quantity)
+                    </td>
+                    <td>@(item.Amount * item.Quantity)</td>
+                    @* <td class="CartBtn">
+                    @Html.ActionLink("Delete", "AddToCart", new { productId=item.Id,quantity=-1 })
+            </td> *@
+                </tr>
+            }
+        </tbody>
+</table>
+
+<a style="font-size:xx-large" href="#" id="buyNowLink"> Buy Now</a>
+}
+else
+{
+<h2>No products in Cart</h2>
+}
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+<script>
+    // Assuming you have jQuery included in your project
+    $(document).ready(function () {
+        $("#buyNowLink").click(function (e) {
+            e.preventDefault(); // Prevent the default behavior of the anchor element
+
+            // Make an AJAX request to the BuyNow action
+            $.ajax({
+                type: "GET", // or "POST" depending on your action method
+                url: "@Url.Action("BuyNow")",
+                dataType: "json",
+                success: function (data) {
+                    if (data.success) {
+                        alert("Order placed!");
+                        location.reload();
+                    } else {
+                        alert("Order failed.");
+                    }
+                },
+                error: function () {
+                    alert("An error occurred.");
+                }
+            });
+        });
+    });
+
+    
+</script>

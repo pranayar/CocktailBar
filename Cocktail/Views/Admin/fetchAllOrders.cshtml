@@ -1,0 +1,88 @@
+﻿@model IEnumerable<Cocktail.Models.Order>
+@{
+
+    Layout = "_AdminLayout";
+}
+<h1>View All Orders</h1>
+@if(Model.Count()>0)
+{
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TotalAmount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderStatus)
+            </th>
+            <th>
+                User ID
+            </th>
+            <th>
+                Name
+            </th>
+            <th>
+                Address
+            </th>
+            <th>
+                Contact
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrderId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalAmount)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.OrderDate)
+            </td>
+                @if (item.OrderStatus == 0)
+                {
+                    <td>
+                        Pending Delivery
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        Delivered
+                    </td>
+                }
+            <td>
+                    @Html.DisplayFor(modelItem => item.customer.UserId)
+            </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.customer.FirstName)  @Html.DisplayFor(modelItem => item.customer.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.customer.FullAddress)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.customer.Contact)
+                </td>
+            @* <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td> *@
+        </tr>
+}
+    </tbody>
+</table>
+}
+else{
+<h2>No orders to display!</h2>
+}

@@ -1,0 +1,108 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Cocktail</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Cocktail.styles.css" asp-append-version="true" />
+
+<style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+          
+            color: black;
+            text-align: center;
+        }
+
+    text {
+        padding: 0.6em 1em;
+        border: 4px solid #fa725a;
+        -webkit-transition: ease-in-out 0.3s;
+        transition: ease-in-out 0.3s;
+        background-color: transparent;
+        color: #fa6044;
+        font-weight: bolder;
+        font-size: 16px;
+        margin-right: 10px;
+        cursor: pointer;
+    }
+
+        text:hover {
+            -webkit-transform: scale(1.2) rotate(10deg);
+            -ms-transform: scale(1.2) rotate(10deg);
+            transform: scale(1.2) rotate(10deg);
+            background-color: #fa725a;
+            color: white;
+        }
+
+        .sign-in-button {
+            padding: 15px 25px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            position: absolute;
+            right: 30px;
+            top: 20px;
+            font-size: medium;
+        }
+
+            .sign-in-button:hover {
+                background-color: #45a049;
+            }
+            .nav{
+                position:absolute;
+                right:10px;
+                top:10px;
+                
+            }
+</style>
+</head>
+<body>
+    @if (Context.Session.GetString("name") != null && @Context.Session.GetString("UserId") != null)
+    {
+        <div class="nav">
+            <a style="margin-top:9px;">Welcome, @Context.Session.GetString("name")</a>
+            <text onclick="window.location.href='@Url.Action("Logout", "Home")'" style="padding: 5px;width:auto; height:40px; margin-left:10px;">Logout</text>
+        </div>
+
+        
+           }
+    else
+    {
+    <button id="login" class="sign-in-button" onclick="window.location.href='@Url.Action("Login", "Home")'" style="width:auto;">Login</button>
+
+    }
+
+    <div style="margin-top:45px;margin-bottom:45px;">
+
+        <text onclick="window.location.href='@Url.Action("FruitCocktails", "Products")'" style="width:auto;">Fruit Cocktails</text>
+        <text onclick="window.location.href='@Url.Action("BeerCocktails", "Products")'" style="width:auto;">Beer Cocktails</text>
+        <text onclick="window.location.href='@Url.Action("VodkaCocktails", "Products")'" style="width:auto;">Vodka Cocktails</text>
+        <text onclick="window.location.href='@Url.Action("About", "Home")'" style="width:auto;">About us</text>
+    </div>
+    <header>
+       
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+           @*  &copy; 2023 - Cocktail - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a> *@
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

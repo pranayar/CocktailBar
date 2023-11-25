@@ -1,0 +1,103 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Welcome to Cocktail Bar Pvt Ltd</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #F5DEB3;
+            color: black;
+            text-align: center;
+        }
+
+        header {
+            background-color: whitesmoke;
+           
+        }
+
+        h1 {
+            margin: 0;
+        }
+
+        .welcome-message {
+            padding: 50px;
+        }
+
+        .cocktail-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .sign-in-button {
+            padding: 15px 25px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            position:absolute;
+            right: 30px;
+            top: 20px;
+            font-size:medium;
+        }
+
+            .sign-in-button:hover {
+                background-color: #45a049;
+            }
+           text{
+            padding: 0.6em 1em;
+            
+            border: 4px solid #fa725a;
+            -webkit-transition: ease-in-out 0.3s;
+            transition: ease-in-out 0.3s;
+            background-color: transparent;
+            color: #fa6044;
+            font-weight: bolder;
+            font-size: 16px;
+            margin-right:10px;
+            cursor: pointer;
+            
+           }
+
+        text:hover {
+                -webkit-transform: scale(1.2) rotate(10deg);
+                -ms-transform: scale(1.2) rotate(10deg);
+                transform: scale(1.2) rotate(10deg);
+                background-color: #fa725a;
+                color: white;
+        }
+    </style>
+</head>
+<body>
+    <button id="login" class="sign-in-button" onclick="window.location.href='@Url.Action("Login", "Home")'" style="width:auto;">Login</button>
+    
+    
+    <h1 style="margin-top:50px;">Welcome to Cocktail Bar Pvt Ltd</h1>
+    <img style="margin-top:40px;" src="~/bar.png" alt="Cocktail Bar Pvt Ltd Cocktails" class="cocktail-image">
+   
+    <div style="margin-top:45px">
+        
+        <text onclick="window.location.href='@Url.Action("FruitCocktails", "Products")'" style="width:auto;">Fruit Cocktails</text>
+        <text onclick="window.location.href='@Url.Action("BeerCocktails", "Products")'" style="width:auto;">Beer Cocktails</text>
+        <text onclick="window.location.href='@Url.Action("VodkaCocktails", "Products")'" style="width:auto;">Vodka Cocktails</text>
+    </div>
+    <div class="welcome-message">
+        <p>Experience the art of mixology at Cocktail Bar Pvt Ltd. We craft exquisite cocktails to tantalize your taste buds and create unforgettable memories.</p>
+
+        <p>Join us for a journey of flavors, where every sip is a celebration. Whether you're a cocktail enthusiast or a casual drinker, our expert mixologists have something special for everyone.</p>
+
+        <p>Explore our menu, discover signature cocktails, and indulge in a vibrant atmosphere that embodies the spirit of Cocktail Bar Pvt Ltd. Cheers to a night of laughter, friends, and exceptional drinks!</p>
+    </div>
+</body>
+</html>
+
