@@ -1,0 +1,136 @@
+CREATE TABLE [dbo].[Admin](
+    [AdminId] [int] IDENTITY(1,1) NOT NULL,
+    [Username] [nvarchar](50) NOT NULL,
+    [Password] [nvarchar](255) NOT NULL,
+    [FirstName] [nvarchar](50) NOT NULL,
+    [LastName] [nvarchar](50) NOT NULL,
+    [Email] [nvarchar](255) NOT NULL,
+    PRIMARY KEY CLUSTERED 
+    (
+        [AdminId] ASC
+    ) WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+);
+
+
+
+CREATE TABLE [dbo].[cart](
+	[cartid] [int] IDENTITY(1,1) NOT NULL,
+	[UserId] [nvarchar](50) NULL,
+	[ProductId] [int] NULL,
+	[quantityCart] [int] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[cartid] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+
+
+
+CREATE TABLE [dbo].[customers](
+	[UserId] [nvarchar](50) NOT NULL,
+	[FirstName] [nvarchar](100) NOT NULL,
+	[LastName] [nvarchar](100) NOT NULL,
+	[DateOfBirth] [date] NOT NULL,
+	[Email] [nvarchar](255) NOT NULL,
+	[Contact] [nvarchar](20) NOT NULL,
+	[FullAddress] [nvarchar](max) NOT NULL,
+	[Password] [nvarchar](max) NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[UserId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+CREATE TABLE [dbo].[Orders](
+	[OrderId] [int] IDENTITY(1,1) NOT NULL,
+	[UserId] [nvarchar](50) NULL,
+	[ProductId] [int] NULL,
+	[OrderDate] [datetime] NOT NULL,
+	[TotalAmount] [decimal](10, 2) NOT NULL,
+	[DeliveryStatus] [int] NOT NULL,
+	[x] [int] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[OrderId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+
+
+
+CREATE TABLE [dbo].[Products](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [nvarchar](100) NOT NULL,
+	[Description] [nvarchar](max) NULL,
+	[Amount] [decimal](10, 2) NOT NULL,
+	[Quantity] [decimal](10, 2) NOT NULL,
+	[ImageLink] [nvarchar](max) NULL,
+	[Category] [nvarchar](50) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+
+-- Insert queries for 'fruit'
+INSERT INTO [dbo].[Products] ([Name], [Description], [Amount], [Quantity], [ImageLink], [Category])
+VALUES 
+    ('Tropical Fruit Punch', 'Exotic fruits in a refreshing punch', 6.99, 1, 'link_to_image21', 'fruit'),
+    ('Berry Blast Smoothie', 'Mixed berries in a delightful smoothie', 8.49, 1, 'link_to_image22', 'fruit'),
+    ('Citrus Burst Mocktail', 'Citrus fruits in a non-alcoholic burst', 5.99, 1, 'link_to_image23', 'fruit'),
+    ('Mango Tango Cooler', 'Mango goodness in a tropical cooler', 7.99, 1, 'link_to_image24', 'fruit'),
+    ('Pineapple Paradise Shake', 'Creamy pineapple shake', 7.49, 1, 'link_to_image25', 'fruit'),
+    ('Kiwi Lime Spritzer', 'Refreshing spritzer with kiwi and lime', 6.49, 1, 'link_to_image26', 'fruit'),
+    ('Watermelon Splash', 'Juicy watermelon drink for a refreshing splash', 8.99, 1, 'link_to_image27', 'fruit'),
+    ('Mixed Fruit Fizz', 'Fizzing cocktail with a mix of fresh fruits', 9.49, 1, 'link_to_image28', 'fruit'),
+    ('Guava Berry Bliss', 'Blissful combination of guava and berries', 7.99, 1, 'link_to_image29', 'fruit'),
+    ('Passion Fruit Elixir', 'Elixir with the exotic flavor of passion fruit', 10.99, 1, 'link_to_image30', 'fruit');
+
+-- Insert queries for 'beer'
+INSERT INTO [dbo].[Products] ([Name], [Description], [Amount], [Quantity], [ImageLink], [Category])
+VALUES 
+    ('Classic Lager', 'Traditional lager beer', 5.49, 1, 'link_to_image11', 'beer'),
+    ('Craft Beer Delight', 'Unique flavors in a craft beer', 6.99, 1, 'link_to_image12', 'beer'),
+    ('Dark Ale Experience', 'Rich and flavorful dark ale', 8.49, 1, 'link_to_image13', 'beer'),
+    ('IPA Adventure', 'Hoppy and bold IPA', 7.99, 1, 'link_to_image14', 'beer'),
+    ('Wheat Beer Bliss', 'Light and refreshing wheat beer', 6.49, 1, 'link_to_image15', 'beer'),
+    ('Honey Blonde Ale', 'Sweet and smooth blonde ale with a hint of honey', 9.99, 1, 'link_to_image16', 'beer'),
+    ('Citrus Haze IPA', 'Hazy IPA with a burst of citrus flavor', 8.99, 1, 'link_to_image17', 'beer'),
+    ('Amber Lager Sunset', 'Amber lager with a sunset-inspired twist', 7.49, 1, 'link_to_image18', 'beer'),
+    ('Session Pale Ale', 'Easy-drinking pale ale for long sessions', 6.99, 1, 'link_to_image19', 'beer'),
+    ('Stout and Coffee Fusion', 'Bold stout infused with rich coffee flavor', 10.49, 1, 'link_to_image20', 'beer');
+
+
+-- Insert queries for 'vodka'
+INSERT INTO [dbo].[Products] ([Name], [Description], [Amount], [Quantity], [ImageLink], [Category])
+VALUES 
+    ('Vodka Sunrise', 'Classic vodka cocktail with a sunrise twist', 8.99, 1, 'link_to_image1', 'vodka'),
+    ('Citrus Vodka Fizz', 'Fizzing vodka drink with a burst of citrus', 7.49, 1, 'link_to_image2', 'vodka'),
+    ('Minty Vodka Mojito', 'Refreshing vodka-based mojito with mint', 6.99, 1, 'link_to_image3', 'vodka'),
+    ('Blue Lagoon Vodka', 'Vodka mixed with blue curaçao for a vibrant drink', 9.99, 1, 'link_to_image4', 'vodka'),
+    ('Cherry Vodka Smash', 'Smashed cocktail with vodka and cherry flavor', 5.99, 1, 'link_to_image5', 'vodka'),
+    ('Coconut Vodka Dream', 'Dreamy cocktail with vodka and coconut infusion', 8.49, 1, 'link_to_image6', 'vodka'),
+    ('Vodka Raspberry Fizz', 'Fizzing vodka drink with a burst of raspberry', 7.99, 1, 'link_to_image7', 'vodka'),
+    ('Cucumber Vodka Cooler', 'Cooling cucumber-infused vodka cocktail', 6.49, 1, 'link_to_image8', 'vodka'),
+    ('Spicy Jalapeño Vodka', 'Vodka with a kick of spicy jalapeño', 9.49, 1, 'link_to_image9', 'vodka'),
+    ('Espresso Vodka Martini', 'Vodka martini with a shot of espresso for a kick', 10.99, 1, 'link_to_image10', 'vodka');
+
+-- Insert query for 'ice'
+INSERT INTO [dbo].[Products] ([Name], [Description], [Amount], [Quantity], [ImageLink], [Category])
+VALUES 
+    ('Ice Cubes Pack', 'Bag of ice cubes for chilling drinks', 2.99, 1, 'link_to_image_ice','optional');
+
+-- Insert query for 'soda'
+INSERT INTO [dbo].[Products] ([Name], [Description], [Amount], [Quantity], [ImageLink], [Category])
+VALUES 
+    ('Soda Variety Pack', 'Assorted soda cans for mixing', 4.49, 1, 'link_to_image_soda', 'optional');
+
+-- Insert query for 'cigarettes'
+INSERT INTO [dbo].[Products] ([Name], [Description], [Amount], [Quantity], [ImageLink], [Category])
+VALUES 
+    ('Premium Cigarettes', 'Pack of premium cigarettes', 6.99, 1, 'link_to_image_cigarettes', 'optional');
+
+insert into admin values('admin2','admin@123','Riya','Dosh','riyad@gmail.com');
+insert into admin values('admin1','admin@123','Pranay','Arora','arorapranay@gmail.com');
+
+
