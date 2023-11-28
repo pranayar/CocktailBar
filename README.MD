@@ -1,4 +1,4 @@
-##STEPS
+## STEPS
 1. Import/Clone the code
 2. Set up the database on the local/remote server, create a schema named cocktailApp and execute the commands in DatabaseScript.txt file.
 3. Make sure the connection string in appsettings.json file (DefaultConnection) is as per your environment!
