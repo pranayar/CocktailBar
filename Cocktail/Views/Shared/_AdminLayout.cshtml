@@ -54,16 +54,27 @@
             .sign-in-button:hover {
                 background-color: #45a049;
             }
+
+        .nav {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+        }
     </style>
 </head>
 <body>
-    
-
+    <div class="nav">
+    <text onclick="window.location.href='@Url.Action("AdminLogout", "Admin")'" style="padding: 5px;width:auto; height:40px; margin-left:10px;">Logout</text>
+    </div>
+   
     <div style="margin-top:45px;margin-bottom:45px;">
 
         <text onclick="window.location.href='@Url.Action("fetchAllProducts", "Admin")'" style="width:auto;">All Products</text>
         <text onclick="window.location.href='@Url.Action("fetchAllCustomers", "Admin")'" style="width:auto;">All Customers</text>
         <text onclick="window.location.href='@Url.Action("fetchAllOrders", "Admin")'" style="width:auto;">All Orders</text>
+
+        
+        
     </div>
     <header>
     </header>

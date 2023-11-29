@@ -103,7 +103,7 @@ namespace Cocktail.Controllers
                                         Description = Convert.ToString(reader["Description"]),
                                         Amount = Convert.ToDouble(reader["Amount"]),
                                         Quantity = Convert.ToDouble(reader["Quantity"]),
-                                        ImageLink = Convert.ToString(reader["ImageLink"]),
+                                        
                                         Category = Convert.ToString(reader["Category"])
 
                                     };
@@ -259,7 +259,7 @@ namespace Cocktail.Controllers
                                             Description = Convert.ToString(reader["Description"]),
                                             Amount = Convert.ToDouble(reader["Amount"]),
                                             Quantity = Convert.ToDouble(reader["quantityCart"]),
-                                            ImageLink = Convert.ToString(reader["ImageLink"]),
+                                            
                                             Category = Convert.ToString(reader["Category"])
 
                                         };

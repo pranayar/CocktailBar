@@ -22,7 +22,7 @@ namespace Cocktail.Models
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Contact number is required.")]
-        [Phone(ErrorMessage = "Invalid contact number.")]
+        
         public string Contact { get; set; }
 
         [Required(ErrorMessage = "Full address is required.")]
@@ -35,7 +35,6 @@ namespace Cocktail.Models
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
-        [Required(ErrorMessage = "Please confirm your password.")]
         [Compare("Password", ErrorMessage = "Passwords do not match.")]
         [DataType(DataType.Password)]
         public string ConfirmPassword { get; set; }

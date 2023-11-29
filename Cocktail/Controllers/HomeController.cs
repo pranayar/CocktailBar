@@ -17,6 +17,7 @@ namespace Cocktail.Controllers
         }
         public IActionResult Index()
         {
+            
             return View();
         }
         public ActionResult About()
@@ -217,12 +218,12 @@ namespace Cocktail.Controllers
                 HttpContext.Session.Clear();
 
                 // Redirect the user to the login page or any other desired page
-                return RedirectToAction("Index");
+                return RedirectToAction("Index","Home");
             }
             catch (Exception)
             {
 
-                return View("Error"); // or handle the exception in an appropriate way
+                return View("Error"); 
             }
         }
     }

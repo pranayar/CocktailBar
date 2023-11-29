@@ -4,7 +4,13 @@
     Layout = "_AdminLayout";
 }
 <h4>Customers</h4>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <hr />
+@if (ViewBag.Message != null)
+{
+    <div class="msg" style="text-align:center; color:red">@ViewBag.Message</div>
+}
 <div class="row">
     <div class="col-md-4">
         <form asp-action="AddCustomer">
@@ -23,8 +29,9 @@
             <div class="form-group">
                 <label asp-for="DateOfBirth" class="control-label"></label>
                 <input asp-for="DateOfBirth" class="form-control" />
-                <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+                <span asp-validation-for="DateOfBirth" class="text-danger-age"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="Email" class="control-label"></label>
                 <input asp-for="Email" class="form-control" />
@@ -62,6 +69,48 @@
     <a asp-action="fetchAllCustomers">Back to List</a>
 </div>
 
+<script>
+    $(document).ready(function () {
+        // Assuming the minimum age is 21
+        var minimumAge = 21;
+
+        // Function to calculate age
+        function calculateAge(dateOfBirth) {
+            var today = new Date();
+            var birthDate = new Date(dateOfBirth);
+            var age = today.getFullYear() - birthDate.getFullYear();
+            var monthDiff = today.getMonth() - birthDate.getMonth();
+
+            if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+                age--;
+            }
+
+            return age;
+        }
+
+        // Attach change event to DateOfBirth input
+        $('#DateOfBirth').change(function () {
+            var dateOfBirth = $(this).val();
+
+            if (dateOfBirth) {
+                var age = calculateAge(dateOfBirth);
+
+                if (age < minimumAge) {
+                    // Display an error message
+                    $('#DateOfBirth').val(''); // Clear the input
+                    alert("You must be at least 21 years old!")
+                    $('.text-danger-age').text('You must be at least 21 years old.');
+                } else {
+                    // Clear any previous error message
+                    $('.text-danger-age').text('');
+                }
+            }
+        });
+    });
+</script>
+
+
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+

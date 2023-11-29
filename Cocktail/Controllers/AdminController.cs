@@ -16,6 +16,8 @@ namespace Cocktail.Controllers
         }
         public ActionResult Index()
         {
+           
+
             return RedirectToAction("Login");
         }
         public Boolean IsAdmin ()
@@ -82,6 +84,23 @@ namespace Cocktail.Controllers
 
             return View();
         }
+
+        public ActionResult AdminLogout()
+        {
+            try
+            {
+                // Clear the user's session data
+                HttpContext.Session.Clear();
+
+             
+                return RedirectToAction("Index","Home");
+            }
+            catch (Exception)
+            {
+
+                return View("Error"); // or handle the exception in an appropriate way
+            }
+        }
         public ActionResult fetchAllProducts()
         {
             if(!IsAdmin())
@@ -118,7 +137,7 @@ namespace Cocktail.Controllers
                                         Description = Convert.ToString(reader["Description"]),
                                         Amount = Convert.ToDouble(reader["Amount"]),
                                         Quantity = Convert.ToDouble(reader["Quantity"]),
-                                        ImageLink = Convert.ToString(reader["ImageLink"]),
+                                        
                                         Category = Convert.ToString(reader["Category"])
 
                                     };
@@ -347,7 +366,7 @@ namespace Cocktail.Controllers
                                     Description = Convert.ToString(reader["Description"]),
                                     Amount = Convert.ToDouble(reader["Amount"]),
                                     Quantity = Convert.ToDouble(reader["Quantity"]),
-                                    ImageLink = Convert.ToString(reader["ImageLink"]),
+                                    
                                     Category = Convert.ToString(reader["Category"])
 
                                 };
@@ -436,7 +455,7 @@ namespace Cocktail.Controllers
                                     Description = Convert.ToString(reader["Description"]),
                                     Amount = Convert.ToDouble(reader["Amount"]),
                                     Quantity = Convert.ToDouble(reader["Quantity"]),
-                                    ImageLink = Convert.ToString(reader["ImageLink"]),
+                                    
                                     Category = Convert.ToString(reader["Category"])
 
                                 };
@@ -544,7 +563,7 @@ namespace Cocktail.Controllers
                                     Description = Convert.ToString(reader["Description"]),
                                     Amount = Convert.ToDouble(reader["Amount"]),
                                     Quantity = Convert.ToDouble(reader["Quantity"]),
-                                    ImageLink = Convert.ToString(reader["ImageLink"]),
+                                    
                                     Category = Convert.ToString(reader["Category"])
 
                                 };
@@ -674,10 +693,32 @@ namespace Cocktail.Controllers
 
                 try
                 {
-                    using (SqlConnection conn = new SqlConnection(connectionString))
+                using (SqlConnection conn = new SqlConnection(connectionString))
+
+                {
+                    conn.Open();
+
+                    using (var cmd = conn.CreateCommand())
+                    {
+                        cmd.CommandText = "SELECT * FROM customers WHERE email = @Email OR Contact = @Contact OR UserId=@UserID";
+                        cmd.Parameters.AddWithValue("@Email", customer.Email);
+                        cmd.Parameters.AddWithValue("@Contact", customer.Contact);
+                        cmd.Parameters.AddWithValue("@UserID", customer.UserId);
+
+                        using (var reader = cmd.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                ViewBag.Message = "User already exists/User ID in use!";
+                                return View("Customer/Add");
+                            }
+                            reader.Close();
+
+                        }
+                        /*using (SqlConnection conn = new SqlConnection(connectionString))
                     {
                         conn.Open();
-
+                        */
 
                         using (var cmd2 = conn.CreateCommand())
                         {
@@ -692,9 +733,10 @@ namespace Cocktail.Controllers
                             cmd2.Parameters.AddWithValue("@FullAddress", customer.FullAddress);
                             cmd2.Parameters.AddWithValue("@Dateofbirth", customer.DateOfBirth);
 
-                        cmd2.ExecuteNonQuery();
+                            cmd2.ExecuteNonQuery();
+                        }
                     }
-                    }
+                }
 
 
                 }
@@ -800,7 +842,8 @@ namespace Cocktail.Controllers
                                     DateOfBirth = Convert.ToDateTime(reader["DateOfBirth"]),
                                     Email = Convert.ToString(reader["email"]),
                                     Contact = Convert.ToString(reader["contact"]),
-                                    FullAddress = Convert.ToString(reader["FullAddress"])
+                                    FullAddress = Convert.ToString(reader["FullAddress"]),
+                                    Password =Convert.ToString(reader["Password"]),
 
 
                                 };

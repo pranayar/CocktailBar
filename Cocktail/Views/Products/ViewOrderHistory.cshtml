@@ -21,9 +21,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.OrderDate)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.OrderStatus)
-            </th>
+
             <th></th>
         </tr>
     </thead>
@@ -46,20 +44,7 @@
                 @Html.DisplayFor(modelItem => item.OrderDate)
             </td>
             
-                @if(item.OrderStatus==0)
-                {
-                    <td>
-                        Pending Delivery
-                    </td>
-                }
-                else
-
-                {
-                    <td>
-                        Delivered
-
-               </td>
-                }
+               
             
         </tr>
 }

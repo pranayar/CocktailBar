@@ -7,7 +7,10 @@
 
 <!DOCTYPE html>
 <html>
+
 <head>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <title>Welcome to Cocktail Bar Pvt Ltd</title>
     <style>
         body {
@@ -49,6 +52,7 @@
             right: 30px;
             top: 20px;
             font-size:medium;
+            
         }
 
             .sign-in-button:hover {
@@ -76,12 +80,26 @@
                 background-color: #fa725a;
                 color: white;
         }
+    .popup {
+            display: none;
+            position: fixed;
+            top: 30%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+        }
     </style>
 </head>
 <body>
+
     <button id="login" class="sign-in-button" onclick="window.location.href='@Url.Action("Login", "Home")'" style="width:auto;">Login</button>
-    
-    
+    <button id="login2" class="sign-in-button" onclick="window.location.href='@Url.Action("Login", "Admin")'" style="width:auto; margin-right:100px;">Admin Login</button>
+
+
     <h1 style="margin-top:50px;">Welcome to Cocktail Bar Pvt Ltd</h1>
     <img style="margin-top:40px;" src="~/bar.png" alt="Cocktail Bar Pvt Ltd Cocktails" class="cocktail-image">
    
@@ -90,6 +108,7 @@
         <text onclick="window.location.href='@Url.Action("FruitCocktails", "Products")'" style="width:auto;">Fruit Cocktails</text>
         <text onclick="window.location.href='@Url.Action("BeerCocktails", "Products")'" style="width:auto;">Beer Cocktails</text>
         <text onclick="window.location.href='@Url.Action("VodkaCocktails", "Products")'" style="width:auto;">Vodka Cocktails</text>
+        <text onclick="window.location.href='@Url.Action("About", "Home")'" style="width:auto;">About us</text>
     </div>
     <div class="welcome-message">
         <p>Experience the art of mixology at Cocktail Bar Pvt Ltd. We craft exquisite cocktails to tantalize your taste buds and create unforgettable memories.</p>
@@ -98,6 +117,8 @@
 
         <p>Explore our menu, discover signature cocktails, and indulge in a vibrant atmosphere that embodies the spirit of Cocktail Bar Pvt Ltd. Cheers to a night of laughter, friends, and exceptional drinks!</p>
     </div>
+   
 </body>
+
 </html>
 

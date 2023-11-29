@@ -4,9 +4,14 @@
     ViewData["Title"] = "List of products";
     
 }
-
+ @if (Context.Session.GetString("name") != null && @Context.Session.GetString("UserId") != null)
+    {
+        <div>
+        
 <h3 style="cursor:pointer; text-align:right" onclick="window.location.href='@Url.Action("ViewCart", "Products")'">Click to View Cart</h3>
 <h3 style="cursor:pointer; text-align:right" onclick="window.location.href='@Url.Action("ViewOrderHistory", "Products")'">Order History</h3>
+    </div>
+    }
 <style>
     .CartBtn {
         width: 140px;
